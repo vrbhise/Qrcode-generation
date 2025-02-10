@@ -1,65 +1,27 @@
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+import random
 
-int main()
-{
-    int lower, upper, x, guess, count = 0, flag = 0;
-    int total_chances;
+print("Hi welcome to the game, This is a number guessing game.\nYou got 7 chances to guess the number. Let's start the game")
 
-    // Taking Inputs
-    printf("Enter Lower bound: ");
-    scanf("%d", &lower);
+number_to_guess = random.randrange(100)
 
-    // Taking Inputs
-    printf("Enter Upper bound: ");
-    scanf("%d", &upper);
+chances = 7
 
-    // Seed the random number generator
-    srand(time(0));
+guess_counter = 0
 
-    // Generating random number between the lower and upper
-    x = (rand() % (upper - lower + 1)) + lower;
-    total_chances
-        = (int)ceil(log(upper - lower + 1) / log(2));
+while guess_counter < chances:
 
-    printf("\n\tYou've only %d chances to guess the "
-           "integer!\n\n",
-           total_chances);
+    guess_counter += 1
+    my_guess = int(input('Please Enter your Guess : '))
 
-    // for calculation of minimum number of guesses depends
-    // upon range
-    while (count < total_chances) {
-        count++;
+    if my_guess == number_to_guess:
+        print(f'The number is {number_to_guess} and you found it right !! in the {guess_counter} attempt')
+        break
 
-        // Taking guessing number as input
-        printf("Guess a number: ");
-        scanf("%d", &guess);
+    elif guess_counter >= chances and my_guess != number_to_guess:
+        print(f'Oops sorry, The number is {number_to_guess} better luck next time')
 
-        // Condition testing
-        if (x == guess) {
-            printf(
-                "Congratulations you did it in %d try!\n",
-                count);
-            // Once guessed, loop will break
-            flag = 1;
-            break;
-        }
-        else if (x > guess) {
-            printf("You guessed too small!\n");
-        }
-        else if (x < guess) {
-            printf("You guessed too high!\n");
-        }
-    }
+    elif my_guess > number_to_guess:
+        print('Your guess is higher ')
 
-    // If Guessing is more than required guesses, shows this
-    // output.
-    if (!flag) {
-        printf("\nThe number is %d\n", x);
-        printf("\tBetter Luck Next time!\n");
-    }
-
-    return 0;
-}
+    elif my_guess < number_to_guess:
+        print('Your guess is lesser')
